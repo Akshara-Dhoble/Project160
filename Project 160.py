@@ -34,8 +34,8 @@ def open_file() :
     global name
     text_area.delete(1.0, END)
     input_box.delete(0 , END)
-    text_file = filedialog.askopenfilename(title = "Open Text File",
-                                           filetypes =(("text Files" , "*.html"),))
+    text_file = filedialog.askopenfilename(title = "Open Html File",
+                                           filetypes =(("html Files" , "*.html"),))
     
     print(text_file)
     name = os.path.basename(text_file)
