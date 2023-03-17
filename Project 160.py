@@ -10,6 +10,7 @@ from PIL import ImageTk , Image
 from tkinter import messagebox
 from tkinter import filedialog
 import os
+import webbrowser
 root = Tk()
 root.title("File Dailog")
 
@@ -46,14 +47,27 @@ def open_file() :
     paragraph = text_file.read()
     text_area.insert(END , paragraph)
     text_file.close()
+    
+def save_file() :
+    file_name = input_box.get()
+    print(file_name)
+    file = open(file_name + ".html"  , "w")
+    text_input = text_area.get("1.0" , END)
+    file.write(text_input)
+    input_box.delete(0 , END)
+    text_area.delete(1.0 , END)
+    messagebox.showinfo("Update" , "Success")
+    
+def html():
+    webbrowser.open(name)
 
 btn_open = Button(root , image=open_image , text="Open File" , command=open_file)
 btn_open.place(relx=0.1, rely=0.05 , anchor=CENTER)
 
-btn_exit= Button(root , image=exit_image , text="Exit" , command=open_file)
+btn_exit= Button(root , image=exit_image , text="Exit" , command=html)
 btn_exit.place(relx=0.15, rely=0.05 , anchor=CENTER)
 
-btn_save = Button(root , image=save_image , text="Save" , command=open_file)
+btn_save = Button(root , image=save_image , text="Save" , command=save_file)
 btn_save.place(relx=0.2, rely=0.05 , anchor=CENTER)
 
 root.mainloop()
