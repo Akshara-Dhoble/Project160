@@ -9,6 +9,7 @@ from tkinter import *
 from PIL import ImageTk , Image
 from tkinter import messagebox
 from tkinter import filedialog
+import os
 root = Tk()
 root.title("File Dailog")
 
@@ -25,11 +26,26 @@ label.place(relx=0.4 , rely=0.05, anchor=CENTER)
 input_box = Entry(root )
 input_box.place(relx=0.6, rely=0.05 , anchor=CENTER)
 
-text_area = Text(root , height=35 , width=70 , bg = "grey")
+text_area = Text(root , height=35 , width=70 , bg = "silver")
 text_area.place(relx=0.5 , rely=0.55, anchor=CENTER)
 
+name = ""
 def open_file() :
-    print("hi")
+    global name
+    text_area.delete(1.0, END)
+    input_box.delete(0 , END)
+    text_file = filedialog.askopenfilename(title = "Open Text File",
+                                           filetypes =(("text Files" , "*.html"),))
+    
+    print(text_file)
+    name = os.path.basename(text_file)
+    formated_name = name.split(".")[0]
+    input_box.insert(END , formated_name)
+    root.title(formated_name)
+    text_file = open(name , "r")
+    paragraph = text_file.read()
+    text_area.insert(END , paragraph)
+    text_file.close()
 
 btn_open = Button(root , image=open_image , text="Open File" , command=open_file)
 btn_open.place(relx=0.1, rely=0.05 , anchor=CENTER)
